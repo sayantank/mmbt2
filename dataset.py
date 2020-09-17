@@ -18,7 +18,7 @@ from flask import Flask,render_template
 from flask import request
 import glob
 
-UPLOAD_FOLDER = "C:\\Users\\sayank\\workspace\\mmbt2\\img"
+from config import UPLOAD_FOLDER
 
 class SubmissionDataSet(Dataset):
     def __init__(self,data,transforms,tokenizer,vocab):

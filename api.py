@@ -24,11 +24,11 @@ from loss import FocalLoss
 from dataset import SubmissionDataSet
 from engine import model_predict, model_forward_predict
 from model.vocab import Vocab
+from config import UPLOAD_FOLDER
 from model.mmbt_clf import MultiModalBertClf
 
 
 app = Flask(__name__, template_folder='templates')
-UPLOAD_FOLDER = "C:\\Users\\sayank\\workspace\\mmbt2\\img"
 
 # bert = BertModel.from_pretrained('bert-base-uncased')
 bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased',do_lower_case = True)
