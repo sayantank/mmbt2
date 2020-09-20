@@ -1,15 +1,34 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <title>#MeToo MMBT</title>
+</head>
+<body>
+    <div class="container main">
+        <div class="container header">
+            <h1>#MeToo Multimodal Sentiment Analysis</h1>
+        </div>
+        <div class="form-wrap">
+            <form method=post enctype = multipart/form-data id="tweet-form">
+                <textarea name="Tweet" form="tweet-form" id="tweet-box" rows=5 placeholder="What's Happening?"></textarea>
+                <div class="submit-div">
+                    <div>
+                        <input type="file" name="image" id="file" form="tweet-form"/>
+                        <label for="file">+ Image</label>
+                    </div>
+                    <input type="submit" value="Predict" form="tweet-form">
+                </div>
+                <br>
+            </form>
+        </div>
+        
+        <h3>Prediction: {{prediction}}</h3>
+        <h3>Text Input: {{txt}}</h3>
+    </div>
+</body>
+</html>
 
-<title>Upload new File</title>
-<h1>Upload new File</h1>
-
-<form method = post enctype = multipart/form-data>
-
-    <input type = file name = image>
-    <input type = text name = Tweet>
-    <input type = submit value = Predict>
-    <br>
-    <h3>Prediction: {{prediction}}</h3>
-    <h3>Text Input: {{txt}}</h3>
-
-</form>
