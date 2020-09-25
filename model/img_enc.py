@@ -27,8 +27,8 @@ class ImageEncoder(nn.Module):
         modules = list(model.children())[:-2]
 
         self.model = nn.Sequential(*modules)
-        if(torch.cuda.is_available()):
-            self.model = self.model.cuda()
+        # if(torch.cuda.is_available()):
+        #     self.model = self.model.cuda()
 
     def forward(self, x):
         out = (self.model(x))

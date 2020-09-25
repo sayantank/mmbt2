@@ -21,12 +21,13 @@ import glob
 from config import UPLOAD_FOLDER
 
 class SubmissionDataSet(Dataset):
-    def __init__(self,data,transforms,tokenizer,vocab):
+    def __init__(self,data,image_location,transforms,tokenizer,vocab):
         self.data = data
         self.transforms = transforms
         self.tokenizer = tokenizer
         self.max_len_sent = 128 - 7 -2
         self.vocab = vocab
+        self.image_location = image_location
 
     def __getitem__(self, index):
         text = self.data
@@ -36,15 +37,24 @@ class SubmissionDataSet(Dataset):
 
         image = None
 
-        try:
-            for f in glob.iglob(UPLOAD_FOLDER + "\\*"):
-                image = Image.open(f)
-
-            image = self.transforms(image)
-        
-        except:
+        if self.image_location is not None:
+            image = Image.open(self.image_location).convert('RGB')
+        else:
             image = Image.fromarray(128*np.ones((256, 256, 3), dtype=np.uint8))
-            image = self.transforms(image)
+
+        image = self.transforms(image)
+        
+
+        # try:
+        #     for f in glob.iglob(UPLOAD_FOLDER + "\\*"):
+        #         print(f)
+        #         image = Image.open(f)
+
+        #     image = self.transforms(image)
+        
+        # except:
+        #     image = Image.fromarray(128*np.ones((256, 256, 3), dtype=np.uint8))
+        #     image = self.transforms(image)
 
         return text,image
 

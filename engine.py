@@ -23,9 +23,9 @@ import glob
 def model_forward_predict(i_epoch, model, batch):
     txt, segment, mask, img = batch
     
-    if(torch.cuda.is_available()):
-    	txt, img = txt.cuda(), img.cuda()
-    	mask, segment = mask.cuda(), segment.cuda()
+    # if(torch.cuda.is_available()):
+    # 	txt, img = txt.cuda(), img.cuda()
+    # 	mask, segment = mask.cuda(), segment.cuda()
 
     out = model(txt,mask,segment,img)
 

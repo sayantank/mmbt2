@@ -31,13 +31,13 @@ class MultiModalBertClf(nn.Module):
         self.clf = nn.Linear(768, self.no_of_classes)
     
     def forward(self, text, text_attention_mask, text_segment, image):
-        if(torch.cuda.is_available()):
-            text = text.cuda()
-            text_attention_mask=text_attention_mask.cuda()
-            text_segment=text_segment.cuda()
-            image = image.cuda()
-            self.clf = self.clf.cuda()
-            self.batch_norm = self.batch_norm.cuda()
+        # if(torch.cuda.is_available()):
+        #     text = text.cuda()
+        #     text_attention_mask=text_attention_mask.cuda()
+        #     text_segment=text_segment.cuda()
+        #     image = image.cuda()
+        #     self.clf = self.clf.cuda()
+        #     self.batch_norm = self.batch_norm.cuda()
         x = self.enc(text, text_attention_mask, text_segment, image)
 
         x = self.batch_norm(x)

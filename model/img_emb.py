@@ -39,19 +39,19 @@ class ImageEmbeddingsForBert(nn.Module):
         seq_length = 7 + 2
 
         cls_id = torch.LongTensor([101])
-        if torch.cuda.is_available():
-            cls_id = cls_id.cuda()
-            self.word_embeddings = self.word_embeddings.cuda()
+        # if torch.cuda.is_available():
+        #     cls_id = cls_id.cuda()
+        #     self.word_embeddings = self.word_embeddings.cuda()
         cls_id = cls_id.unsqueeze(0).expand(batch_size, 1)
         
-        if torch.cuda.is_available():
-            cls_id = cls_id.cuda()
+        # if torch.cuda.is_available():
+        #     cls_id = cls_id.cuda()
         cls_token_embeddings = self.word_embeddings(cls_id)
         
         sep_id = torch.LongTensor([102])
-        if torch.cuda.is_available():
-            sep_id = sep_id.cuda()
-            self.img_embeddings = self.img_embeddings.cuda()
+        # if torch.cuda.is_available():
+        #     sep_id = sep_id.cuda()
+        #     self.img_embeddings = self.img_embeddings.cuda()
         sep_id = sep_id.unsqueeze(0).expand(batch_size, 1)
         sep_token_embeddings = self.word_embeddings(sep_id)
         
@@ -61,10 +61,10 @@ class ImageEmbeddingsForBert(nn.Module):
         [cls_token_embeddings, batch_image_embeddings_768, sep_token_embeddings], dim=1)
         
         position_ids = torch.arange(seq_length, dtype=torch.long)
-        if torch.cuda.is_available():
-            position_ids = position_ids.cuda()
-            self.position_embeddings = self.position_embeddings.cuda()
-            self.token_type_embeddings= self.token_type_embeddings.cuda()
+        # if torch.cuda.is_available():
+        #     position_ids = position_ids.cuda()
+        #     self.position_embeddings = self.position_embeddings.cuda()
+        #     self.token_type_embeddings= self.token_type_embeddings.cuda()
         position_ids = position_ids.unsqueeze(0).expand(batch_size, seq_length)
         
         position_embeddings = self.position_embeddings(position_ids)
@@ -72,10 +72,10 @@ class ImageEmbeddingsForBert(nn.Module):
         token_type_embeddings = self.token_type_embeddings(token_type_ids)
         
         embeddings = token_embeddings+position_embeddings+token_type_embeddings
-        if torch.cuda.is_available():
-            embeddings = embeddings.cuda()
-            self.LayerNorm=self.LayerNorm.cuda()
-            self.dropout=self.dropout.cuda()
+        # if torch.cuda.is_available():
+        #     embeddings = embeddings.cuda()
+        #     self.LayerNorm=self.LayerNorm.cuda()
+        #     self.dropout=self.dropout.cuda()
         embeddings = self.LayerNorm(embeddings)
         embeddings = self.dropout(embeddings)
         

@@ -41,10 +41,10 @@ class MultiModalBertEncoder(nn.Module):
         batch_size = input_text.size(0)
 
         temp = torch.ones(batch_size, 7+2).long()
-        if torch.cuda.is_available():
-            temp = temp.cuda()
-            self.encoder = self.encoder.cuda()
-            self.pooler = self.pooler.cuda()
+        # if torch.cuda.is_available():
+        #     temp = temp.cuda()
+        #     self.encoder = self.encoder.cuda()
+        #     self.pooler = self.pooler.cuda()
         attention_mask = torch.cat(
             [
                 temp, text_attention_mask
@@ -58,8 +58,8 @@ class MultiModalBertEncoder(nn.Module):
         )
         
         image_token_type_ids = torch.LongTensor(batch_size, 7+2).fill_(0)
-        if(torch.cuda.is_available()):
-            image_token_type_ids= image_token_type_ids.cuda()
+        # if(torch.cuda.is_available()):
+        #     image_token_type_ids= image_token_type_ids.cuda()
         
         image = self.image_encoder(input_image)
         image_embedding_out = self.image_embeddings(image, image_token_type_ids)
